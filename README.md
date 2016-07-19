@@ -7,8 +7,8 @@
 1. 新建一个Messagener mMessagener,Service#onBind()返回mMessagener.getBinder();
 2. MainActivity在bindService的回调中将IBinder强转为Messagener,Main拥有Service的Messager,Main可以给Service发送指令了.
   
-    private ServiceConnection mConn = new ServiceConnection()
-    {
+        private ServiceConnection mConn = new ServiceConnection()
+        {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service)
         {
@@ -35,7 +35,7 @@
             isConn = false;
             mTvState.setText("disconnected!");
         }
-    };
+        };
 
 3. Service如何拥有Main的Messagener
    Main中新定义一个Messagener mMessagener
