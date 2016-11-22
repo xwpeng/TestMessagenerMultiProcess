@@ -12,4 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Messenger Test!"/>
+
+    <Button
+        android:id="@+id/id_button_startReply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="call service start push message"
+        />
+
 </LinearLayout>

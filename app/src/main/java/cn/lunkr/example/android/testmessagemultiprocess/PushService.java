@@ -16,9 +16,9 @@ import android.support.annotation.Nullable;
 public class PushService extends Service {
 
     private static final int MSG_SUM = 0x110;
-    private Messenger mToMainMessenger;
+    public static final int MSG_REPLY = 0x111;
+    private Messenger mToMainMessenger;//客户端Messenger,拥有发消息给客服端能力
 
-    //最好换成HandlerThread的形式
     private Messenger mMessenger = new Messenger(new Handler()
     {
         @Override
@@ -30,6 +30,9 @@ public class PushService extends Service {
                 case MSG_SUM:
                     mToMainMessenger = msg.replyTo;
                     break;
+                case MSG_REPLY:
+                    reply();
+                    break;
             }
 
             super.handleMessage(msg);
@@ -39,15 +42,14 @@ public class PushService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        reply();
         return mMessenger.getBinder();
     }
 
-    void reply() {
+    private void reply() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < 30; i++) {
+                for (int i = 0; i < 100; i++) {
                     if (mToMainMessenger != null) {
                         Message m = new Message();
                         m.what = MSG_SUM;
